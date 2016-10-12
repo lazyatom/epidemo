@@ -1,15 +1,17 @@
 require 'csv'
 
 class Simulation
-  def initialize(number_of_initial_cases: 30, number_of_stickers: 3)
+  def initialize(number_of_initial_cases: 10, number_of_stickers: 3)
     @people = {}
     @records = []
     @number_of_stickers = number_of_stickers
+    @number_of_initial_cases = number_of_initial_cases
     number_of_initial_cases.times { |x| @people[x] = number_of_stickers }
     FakeRecord.reset(number_of_initial_cases)
   end
 
   def run(interaction_count: 150)
+    @people_ballot = @people.keys.dup
     interaction_count.times do
       source = give_sticker
       new_record = FakeRecord.new(source)
@@ -31,13 +33,15 @@ class Simulation
   private
 
   def give_sticker
-    person = @people.keys.sample
+    person = @people_ballot.sample
     stickers_left = @people[person]
     if stickers_left == 1
       @people.delete(person)
+      @people_ballot.delete_if { |p| p == person }
     else
       @people[person] = stickers_left - 1
     end
+    @people_ballot += @people.keys
     person
   end
 

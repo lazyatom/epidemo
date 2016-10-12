@@ -6,7 +6,7 @@
         <h1><%= @record.id %></h1>
       </div>
       <%= f.hidden_field :source_id %>
-      <%= f.select :sex, Record.sexes.keys.map { |k| [k.humanize, k] } %>
+      <%= f.select :gender, Record.genders.keys.map { |k| [k.humanize, k] } %>
       <%= f.select :age_range, Record.age_ranges.keys.map { |k| [k.gsub('_plus', '+').gsub('_', ' to '), k] } %>
       <%= f.select :infection_location, Record.infection_locations.keys.map { |k| [k.humanize, k] } %>      
       <%= hidden_field_tag :secret, Rails.application.secrets.http_password %>

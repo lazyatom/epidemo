@@ -49,7 +49,7 @@ class Simulation
   end
 
   class FakeRecord
-    attr_reader :id, :source_id, :sex, :age_range, :infection_location, :created_at, :updated_at
+    attr_reader :id, :source_id, :gender, :age_range, :infection_location, :created_at, :updated_at
 
     def self.reset(next_id)
       @next_id = next_id
@@ -63,7 +63,7 @@ class Simulation
 
     def initialize(source_id)
       @source_id = source_id
-      @sex = Record.sexes.keys.sample
+      @gender = Record.genders.keys.sample
       @age_range = Record.age_ranges.keys.sample
       @infection_location = Record.infection_locations.keys.sample
       @created_at = @updated_at = FakeClock.now

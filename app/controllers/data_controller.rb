@@ -14,11 +14,12 @@ class DataController < ApplicationController
 
   def simulation
     sim_params = {
-      number_of_initial_cases: (params[:number_of_initial_cases] || 10).to_i,
-      number_of_stickers: (params[:number_of_stickers] || 3).to_i
+      number_of_initial_cases: params.fetch(:number_of_initial_cases, 10).to_i,
+      number_of_stickers: params.fetch(:number_of_stickers, 3).to_i
     }
     s = Simulation.new(sim_params)
-    s.run(interaction_count: [10000, (params[:number_of_iterations] || 1000).to_i].min)
+    Random.srand(params.fetch(:seed, 123456).to_i)
+    s.run(interaction_count: [10000, params.fetch(:number_of_iterations, 1000).to_i].min)
     send_data s.data, filename: 'epidemo-simulation.csv'
   end
 end

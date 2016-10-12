@@ -11,7 +11,7 @@ class RecordsController < ApplicationController
   def update
     @record = Record.find(params[:id])
     if @record.update_attributes(record_params)
-      flash.now[:notice] = "Record update"
+      flash.now[:notice] = "Record updated"
     else
       flash.now[:alert] = "There was a problem updating this record"
     end

@@ -1,15 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Epidemo</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
 
   <body>
-    <%= yield %>
+    <% if %i(notice alert).map { |k| flash[k] }.any? %>
+      <div class="container">
+        <% if text = flash[:notice] %>
+          <div class="alert alert-info" role="alert"><%= text %></div>
+        <% end %>
+        <% if text = flash[:alert] %>
+          <div class="alert alert-danger" role="alert"><%= text %></div>
+        <% end %>
+      </div>
+    <% end %>
+        
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>

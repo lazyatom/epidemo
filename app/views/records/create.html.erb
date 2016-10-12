@@ -1,4 +1,13 @@
-<div class="record">
-  <p>New case number</p>
-  <p><strong><%= @record.id %></strong></p>
-</div>
+<div class="row">
+  <div class="col-sm-12">
+    <%= bootstrap_form_for @record do |f| %>
+      <div class="form-group">
+        <label class="control-label">New case number</label>
+        <h1><%= @record.id %></h1>
+      </div>
+      <%= f.select :gender, Record.genders.keys.map { |k| [k.humanize, k] } %>
+      <%= f.select :age_range, Record.age_ranges.keys.map { |k| [k.gsub('_plus', '+').gsub('_', ' to '), k] } %>
+      <%= f.select :infection_location, Record.infection_locations.keys.map { |k| [k.humanize, k] } %>      
+      <%= hidden_field_tag :secret, Rails.application.secrets.http_password %>
+      <%= f.primary %>
+    <% end %>

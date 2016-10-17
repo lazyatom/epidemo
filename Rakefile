@@ -5,7 +5,7 @@ require_relative 'config/application'
 
 Rails.application.load_tasks
 
-task :init do
+task init: :environment do
   unless ENV['START_ID'].to_i > 0
     raise "Specify the start ID as START_ID=123"
   end

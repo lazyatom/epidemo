@@ -6,8 +6,13 @@ require_relative 'config/application'
 Rails.application.load_tasks
 
 task init: :environment do
-  unless ENV['START_ID'].to_i > 0
-    raise "Specify the start ID as START_ID=123"
+  unless ENV['INITIAL_CASES'].to_i > 0
+    raise "Specify the start ID as INITIAL_CASES=123"
   end
-  Record.connection.execute("ALTER SEQUENCE records_id_seq RESTART #{ENV['START_ID']}")
+
+  raise "Database is not empty!" unless Record.all.empty?
+
+  ENV['INITIAL_CASES'].to_i.times do
+    Record.create(source_id: 0, infection_location: :first_floor, age_range: nil, gender: nil)
+  end
 end

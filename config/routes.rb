@@ -6,6 +6,6 @@ Rails.application.routes.draw do
   get "/qr_code", to: "qr_codes#show"
   get "/data", to: "data#index"
   get "/simulation", to: "data#simulation"
-  get "/stickers", to: "data#stickers"
+  get "/stickers", to: "data#stickers", as: :sticker
 end
 

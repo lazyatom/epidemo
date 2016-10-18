@@ -46,6 +46,7 @@
       <%# <%= f.select :infection_location, Record.infection_locations.keys.map { |k| [k.humanize, k] } %1> %>      
       <%= hidden_field_tag :secret, Rails.application.secrets.http_password %>
       <%= f.primary "Update case", class: 'btn btn-primary btn-lg btn-block' %>
+      <p>Thanks!</p>
     <% end %>
   </div>
 </div>

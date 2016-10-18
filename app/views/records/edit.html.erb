@@ -10,5 +10,7 @@
       <%= f.select :age_range, Record.age_ranges.keys.map { |k| [k.gsub('_plus', '+').gsub('_', ' to '), k] } %>
       <%= f.select :infection_location, Record.infection_locations.keys.map { |k| [k.humanize, k] } %>      
       <%= hidden_field_tag :secret, Rails.application.secrets.http_password %>
-      <%= f.primary %>
+      <%= f.primary "Update case" %>
     <% end %>
+  </div>
+</div>

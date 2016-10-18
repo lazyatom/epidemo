@@ -1,10 +1,16 @@
 class RecordsController < ApplicationController
   before_filter :check_secret
 
+  def new
+    @record = Record.new(record_params)
+  end
+
   def create
     @record = Record.new(record_params)
-    unless @record.save
-      render text: "Woah"
+    if @record.save
+      render action: :edit
+    else
+      render text: "There's been an error creating this record"
     end
   end
 
@@ -15,7 +21,7 @@ class RecordsController < ApplicationController
     else
       flash.now[:alert] = "There was a problem updating this record"
     end
-    render action: :create
+    render action: :edit
   end
 
   private

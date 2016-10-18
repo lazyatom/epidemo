@@ -6,9 +6,43 @@
         <h1><%= @record.id %></h1>
       </div>
       <%= f.hidden_field :source_id %>
-      <%= f.select :gender, Record.genders.keys.map { |k| [k.humanize, k] } %>
-      <%= f.select :age_range, Record.age_ranges.keys.map { |k| [k.gsub('_plus', '+').gsub('_', ' to '), k] } %>
-      <%= f.select :infection_location, Record.infection_locations.keys.map { |k| [k.humanize, k] } %>      
+      <fieldset>
+        <label>Gender</label><br>
+        <div class="btn-group" data-toggle="buttons">
+          <% Record.genders.keys.each.with_index do |gender, i| %>
+            <% selected = f.object.gender.nil? ? i==0 : f.object.gender == gender %>
+            <label class="btn btn-primary <%= 'active' if selected %>">
+              <input type="radio" name="record[gender]" value="<%= gender %>" id="record_gender_<%= gender %>" autocomplete="off" <% 'checked' if selected %>> <%= gender.to_s.humanize %>
+            </label>
+          <% end %>
+        </div>
+      </fieldset>
+      <fieldset>
+        <label>Age range</label><br>
+        <div class="btn-group" data-toggle="buttons">
+          <% Record.age_ranges.keys.each.with_index do |age_range, i| %>
+            <% selected = f.object.age_range.nil? ? i==0 : f.object.age_range == age_range %>
+            <label class="btn btn-primary <%= 'active' if selected %>">
+              <input type="radio" name="record[age_range]" value="<%= age_range %>" id="record_age_range_<%= age_range %>" autocomplete="off" <% 'checked' if selected %>> <%= age_range.to_s.gsub('_plus', '+').gsub('_', ' to ').humanize %>
+            </label>
+          <% end %>
+        </div>
+      </fieldset>
+      <fieldset>
+        <label>Infection location</label><br>
+        <div class="btn-group" data-toggle="buttons">
+          <% Record.infection_locations.keys.each.with_index do |infection_location, i| %>
+            <% selected = f.object.infection_location.nil? ? i==0 : f.object.infection_location == infection_location %>
+            <label class="btn btn-primary <%= 'active' if selected %>">
+              <input type="radio" name="record[infection_location]" value="<%= infection_location %>" id="record_infection_location_<%= infection_location %>" autocomplete="off" <% 'checked' if selected %>> <%= infection_location.to_s.humanize %>
+            </label>
+          <% end %>
+        </div>
+      </fieldset>
+      <p></p>
+      <%# <%= f.select :gender, Record.genders.keys.map { |k| [k.humanize, k] } %1> %>
+      <%# <%= f.select :age_range, Record.age_ranges.keys.map { |k| [k.gsub('_plus', '+').gsub('_', ' to '), k] } %1> %>
+      <%# <%= f.select :infection_location, Record.infection_locations.keys.map { |k| [k.humanize, k] } %1> %>      
       <%= hidden_field_tag :secret, Rails.application.secrets.http_password %>
       <%= f.primary "Update case", class: 'btn btn-primary btn-lg btn-block' %>
     <% end %>

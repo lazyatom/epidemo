@@ -4,7 +4,7 @@
       <%= f.hidden_field :source_id %>
       <%= hidden_field_tag :secret, Rails.application.secrets.http_password %>
       <p>You have scanned case #<%= @record.source_id %></p>
-      <%= f.primary "Create new case", class: 'btn btn-primary btn-lg' %>
+      <%= f.primary "Create new case", class: 'btn btn-primary btn-lg btn-block' %>
     <% end %>
   </div>
 </div>

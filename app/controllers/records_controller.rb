@@ -8,10 +8,14 @@ class RecordsController < ApplicationController
   def create
     @record = Record.new(record_params)
     if @record.save
-      render action: :edit
+      redirect_to edit_record_path(@record, secret: Rails.application.secrets.http_password)
     else
       render text: "There's been an error creating this record"
     end
+  end
+
+  def edit
+    @record = Record.find(params[:id])
   end
 
   def update

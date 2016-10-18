@@ -26,5 +26,9 @@ class DataController < ApplicationController
     s.run(interaction_count: [10000, params.fetch(:number_of_iterations, 1000).to_i].min)
     send_data s.data, filename: 'epidemo-simulation.csv'
   end
+
+  def stickers
+    @records = Record.where.not(scanned_by: nil).order(created_at: :desc)
+  end
 end
 

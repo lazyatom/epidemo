@@ -35,7 +35,7 @@ class RecordsController < ApplicationController
   end
 
   def record_params
-    params.require(:record).permit(:source_id, :gender, :age_range, :infection_location)
+    params.require(:record).permit(:source_id, :gender, :age_range, :infection_location, :scanned_by)
   end
 end
 

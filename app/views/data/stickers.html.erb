@@ -1,0 +1,7 @@
+<div class="row">
+  <div class="col-xs-12">
+    <% @records.each do |record| %>
+      <p>Please bring sticker set <strong><%= record.id %></strong> to <%= record.scanned_by %></p>
+    <% end %>
+  </div>
+</div>

@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   get "/data", to: "data#index"
   get "/simulation", to: "data#simulation"
   get "/stickers", to: "data#stickers", as: :sticker
+  post "/stickers/:record_id/take", to: "data#take_sticker", as: :take_sticker
 end
 

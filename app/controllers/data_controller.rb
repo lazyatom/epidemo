@@ -28,7 +28,13 @@ class DataController < ApplicationController
   end
 
   def stickers
-    @records = Record.where.not(scanned_by: nil).order(created_at: :desc)
+    @records = Record.awaiting_stickers
+  end
+
+  def take_sticker
+    @record = Record.find(params[:record_id])
+    @record.update_attributes(stickers_taken: true)
+    redirect_to sticker_path
   end
 end
 

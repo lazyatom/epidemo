@@ -3,8 +3,21 @@
 <% end %>
 <div class="row">
   <div class="col-xs-12">
-    <% @records.each do |record| %>
-      <p>Please bring sticker set <strong><%= record.id %></strong> to <%= record.scanned_by %></p>
-    <% end %>
+    <table class="table table-striped">
+      <% @records.each do |record| %>
+        <tr>
+          <td>
+            <%= form_tag take_sticker_path(record_id: record.to_param), class: "form-inline" do %>
+              <div class="form-group">
+                <%= submit_tag "Take", class: "btn btn-lg btn-default btn-block" %>
+              </div>
+            <% end %>
+          </td>
+          <td>
+            <h1>Sticker set <strong><%= record.id %></strong> to <%= record.scanned_by %></h1>
+          </td>
+        </tr>
+      <% end %>
+    </table>
   </div>
 </div>

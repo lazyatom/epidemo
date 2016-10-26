@@ -13,6 +13,6 @@ task init: :environment do
   raise "Database is not empty!" unless Record.all.empty?
 
   ENV['INITIAL_CASES'].to_i.times do
-    Record.create(source_id: 0, infection_location: :first_floor, age_range: :"30_34", gender: :female)
+    Record.create(source_id: 0, infection_location: :first_floor, age_range: :"30_34", gender: :female, stickers_taken: true)
   end
 end

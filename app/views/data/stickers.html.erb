@@ -1,5 +1,7 @@
 <% content_for :meta do %>
-  <meta http-equiv="refresh" content="5;URL='<%= sticker_url %>'" />
+  <% unless params[:no] %>
+    <meta http-equiv="refresh" content="5;URL='<%= sticker_url %>'" />
+  <% end %>
 <% end %>
 <div class="row">
   <div class="col-xs-12">
